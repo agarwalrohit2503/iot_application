@@ -10,11 +10,31 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<ElectricalAppliance> appliances =
         Provider.of<List<ElectricalAppliance>>(context, listen: true);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Material App Bar'),
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: AppBar(
+            bottom: TabBar(
+              isScrollable: true,
+              labelColor: Colors.black,
+              indicator: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.white,
+              ),
+              indicatorSize: TabBarIndicatorSize.tab,
+              tabs: const [
+                Tab(text: "Hall"),
+                Tab(text: "Dining"),
+                Tab(text: "Bathroom"),
+                Tab(text: "Bedroom"),
+              ],
+            ),
+          ),
+        ),
+        body: _buildGridView(appliances),
       ),
-      body: _buildGridView(appliances),
     );
   }
 
